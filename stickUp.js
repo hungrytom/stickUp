@@ -66,6 +66,8 @@ function($) {
 			//$(this).find('*').removeClass(itemHover);
 		}
 		$(document).on('scroll', function() {
+			var device_width;
+
 			varscroll = parseInt($(document).scrollTop());
 			if(menuSize != null){
 				for(var i=0;i < menuSize;i++)
@@ -93,9 +95,14 @@ function($) {
 				}
 			}
 
+			/**
+				Modified to disable stick up for small devices
 
+				@author Tom
+			**/
+			device_width = $(window).width() / parseFloat($("body").css("font-size"));
+			if(vartop < varscroll + topMargin && device_width > 51.4375) {
 
-			if(vartop < varscroll + topMargin){
 				$('.stuckMenu').addClass('isStuck');
 				$('.stuckMenu').next().closest('div').css({
 					'margin-top': stickyHeight + stickyMarginB + currentMarginT + 'px'
